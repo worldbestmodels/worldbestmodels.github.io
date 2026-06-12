@@ -1951,6 +1951,98 @@
       .hero-sub { font-size: 1rem; }
     }
 
+    /* ─── MODEL GALLERY (masonry) ─── */
+    .gallery {
+      columns: 260px;
+      column-gap: 14px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      display: block;
+      width: 100%;
+      margin: 0 0 14px;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      border-radius: 5px;
+      transition: transform 0.6s ease, filter 0.3s ease;
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 5px;
+      background: linear-gradient(to top, rgba(232,56,109,0.35), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .gallery-item::before {
+      content: '⤢';
+      position: absolute;
+      top: 0.8rem; right: 0.9rem;
+      z-index: 2;
+      color: #fff;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item:hover::after { opacity: 1; }
+    .gallery-item:hover::before { opacity: 0.9; transform: translateY(0); }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(8,6,8,0.96);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 5px;
+      box-shadow: 0 24px 90px rgba(0,0,0,0.6);
+    }
+    .lb-btn {
+      position: absolute;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, border-color 0.25s;
+      backdrop-filter: blur(8px);
+    }
+    .lb-btn:hover { background: rgba(232,56,109,0.25); border-color: var(--pink); }
+    .lb-close { top: 1.3rem; right: 1.3rem; width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; }
+    .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; font-size: 1.5rem; }
+    .lb-prev { left: 1.3rem; }
+    .lb-next { right: 1.3rem; }
+    @media (max-width: 600px) {
+      .lb-prev { left: 0.6rem; } .lb-next { right: 0.6rem; }
+      .lb-prev, .lb-next { width: 44px; height: 44px; }
+    }
+
     /* — Respect reduced motion — */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -2349,110 +2441,27 @@
         </a>
       </div>
 
-      <div class="models-grid">
-
-        <!-- Model Card 1 — replace src with real photo, update name/stats -->
-        <div class="model-card reveal reveal-delay-1">
-          <div class="model-photo">
-            <div class="model-photo-placeholder">
-              <span class="model-plus" aria-hidden="true">+</span>
-              <span class="model-coming-badge">Comp Card Soon</span>
-            </div>
-          </div>
-          <div class="model-info">
-            <div class="model-name">Model Name</div>
-            <div class="model-handle">@instagram</div>
-            <div class="model-stats">
-              <div class="model-stat">
-                <span class="model-stat-label">Height</span>
-                <span class="model-stat-value">5'9"</span>
-              </div>
-              <div class="model-stat">
-                <span class="model-stat-label">Eyes</span>
-                <span class="model-stat-value">Brown</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Model Card 2 -->
-        <div class="model-card reveal reveal-delay-2">
-          <div class="model-photo">
-            <div class="model-photo-placeholder">
-              <span class="model-plus" aria-hidden="true">+</span>
-              <span class="model-coming-badge">Comp Card Soon</span>
-            </div>
-          </div>
-          <div class="model-info">
-            <div class="model-name">Model Name</div>
-            <div class="model-handle">@instagram</div>
-            <div class="model-stats">
-              <div class="model-stat">
-                <span class="model-stat-label">Height</span>
-                <span class="model-stat-value">5'7"</span>
-              </div>
-              <div class="model-stat">
-                <span class="model-stat-label">Eyes</span>
-                <span class="model-stat-value">Green</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Model Card 3 -->
-        <div class="model-card reveal reveal-delay-3">
-          <div class="model-photo">
-            <div class="model-photo-placeholder">
-              <span class="model-plus" aria-hidden="true">+</span>
-              <span class="model-coming-badge">Comp Card Soon</span>
-            </div>
-          </div>
-          <div class="model-info">
-            <div class="model-name">Model Name</div>
-            <div class="model-handle">@instagram</div>
-            <div class="model-stats">
-              <div class="model-stat">
-                <span class="model-stat-label">Height</span>
-                <span class="model-stat-value">5'10"</span>
-              </div>
-              <div class="model-stat">
-                <span class="model-stat-label">Eyes</span>
-                <span class="model-stat-value">Hazel</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Model Card 4 -->
-        <div class="model-card reveal reveal-delay-1">
-          <div class="model-photo">
-            <div class="model-photo-placeholder">
-              <span class="model-plus" aria-hidden="true">+</span>
-              <span class="model-coming-badge">Comp Card Soon</span>
-            </div>
-          </div>
-          <div class="model-info">
-            <div class="model-name">Model Name</div>
-            <div class="model-handle">@instagram</div>
-            <div class="model-stats">
-              <div class="model-stat">
-                <span class="model-stat-label">Height</span>
-                <span class="model-stat-value">5'8"</span>
-              </div>
-              <div class="model-stat">
-                <span class="model-stat-label">Eyes</span>
-                <span class="model-stat-value">Brown</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="gallery reveal">
+        <button class="gallery-item" onclick="openLightbox(0)"  aria-label="View model photo 1"><img src="models/model-01.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(1)"  aria-label="View model photo 2"><img src="models/model-02.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(2)"  aria-label="View model photo 3"><img src="models/model-03.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(3)"  aria-label="View model photo 4"><img src="models/model-04.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(4)"  aria-label="View model photo 5"><img src="models/model-05.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(5)"  aria-label="View model photo 6"><img src="models/model-06.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(6)"  aria-label="View model photo 7"><img src="models/model-07.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(7)"  aria-label="View model photo 8"><img src="models/model-08.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(8)"  aria-label="View model photo 9"><img src="models/model-09.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(9)"  aria-label="View model photo 10"><img src="models/model-10.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(10)" aria-label="View model photo 11"><img src="models/model-11.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(11)" aria-label="View model photo 12"><img src="models/model-12.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <button class="gallery-item" onclick="openLightbox(12)" aria-label="View model photo 13"><img src="models/model-13.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
       </div>
 
       <div class="models-coming-note reveal">
         <p>
-          <strong>Full comp cards coming soon.</strong> We're working with our models on professional portfolio shoots —
-          check back shortly or follow <a href="https://www.instagram.com/wbm.worldbestmodels/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none;">@wbm.worldbestmodels</a> on Instagram for the latest model spotlights.
+          A glimpse of the talent we train and bring to castings in Miami &amp; Paris. Follow
+          <a href="https://www.instagram.com/wbm.worldbestmodels/" target="_blank" rel="noopener" style="color:var(--pink-text);text-decoration:none;">@wbm.worldbestmodels</a>
+          for the latest — or <a href="#contact" style="color:var(--pink-text);text-decoration:none;">join the roster</a>.
         </p>
       </div>
     </div>
@@ -2674,6 +2683,14 @@
     </a>
   </div>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="lb-btn lb-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" onclick="lbNav(-1)" aria-label="Previous">&#8249;</button>
+    <img id="lb-img" src="" alt="World Best Models — model portfolio (enlarged)" />
+    <button class="lb-btn lb-next" onclick="lbNav(1)" aria-label="Next">&#8250;</button>
+  </div>
+
   <!-- FLOATING WHATSAPP -->
   <a href="https://wa.me/17865689522?text=Hi%20Lea!%20I%27m%20interested%20in%20World%20Best%20Models%20%F0%9F%8C%9F"
      target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
@@ -2718,6 +2735,32 @@
         setTimeout(() => s.remove(), 700);
       });
     }
+
+    // ── GALLERY LIGHTBOX ──
+    const GALLERY_COUNT = 13;
+    let lbIndex = 0;
+    const lbEl = () => document.getElementById('lightbox');
+    function lbSrc(i) { return 'models/model-' + String(i + 1).padStart(2, '0') + '.jpg'; }
+    function openLightbox(i) {
+      lbIndex = i;
+      document.getElementById('lb-img').src = lbSrc(i);
+      lbEl().classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lbEl().classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbNav(d) {
+      lbIndex = (lbIndex + d + GALLERY_COUNT) % GALLERY_COUNT;
+      document.getElementById('lb-img').src = lbSrc(lbIndex);
+    }
+    document.addEventListener('keydown', (e) => {
+      if (!lbEl().classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') lbNav(-1);
+      else if (e.key === 'ArrowRight') lbNav(1);
+    });
 
     // ── NAV ──
     const nav = document.getElementById('nav');
