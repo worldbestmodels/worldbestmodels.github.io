@@ -2469,13 +2469,6 @@
         <button class="gallery-item" onclick="openLightbox(10)" aria-label="View model photo 11"><img src="models/model-11.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
         <button class="gallery-item" onclick="openLightbox(11)" aria-label="View model photo 12"><img src="models/model-12.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
         <button class="gallery-item" onclick="openLightbox(12)" aria-label="View model photo 13"><img src="models/model-13.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(13)" aria-label="View model photo 14"><img src="models/model-14.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(14)" aria-label="View model photo 15"><img src="models/model-15.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(15)" aria-label="View model photo 16"><img src="models/model-16.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(16)" aria-label="View model photo 17"><img src="models/model-17.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(17)" aria-label="View model photo 18"><img src="models/model-18.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(18)" aria-label="View model photo 19"><img src="models/model-19.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-        <button class="gallery-item" onclick="openLightbox(19)" aria-label="View model photo 20"><img src="models/model-20.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
       </div>
 
       <div class="models-coming-note reveal">
@@ -2758,7 +2751,7 @@
     }
 
     // ── GALLERY LIGHTBOX ──
-    const GALLERY_COUNT = 20;
+    const GALLERY_COUNT = 13;
     let lbIndex = 0;
     const lbEl = () => document.getElementById('lightbox');
     function lbSrc(i) { return 'models/model-' + String(i + 1).padStart(2, '0') + '.jpg'; }
