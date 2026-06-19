@@ -1284,39 +1284,35 @@
       nav.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ── SCROLL REVEAL ──
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-    // gallery stagger: toggle .visible on the grid wrapper
-    const galleryObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); galleryObs.unobserve(e.target); } });
-    }, { threshold: 0.08 });
+    // ── SCROLL REVEAL (scroll/resize/load driven + failsafe; no fragile IO) ──
+    function runCount(el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+      const raw = el.dataset.count, hasPlus = raw.includes('+'), target = parseInt(raw, 10);
+      if (reduceMotion) { el.textContent = target + (hasPlus ? '+' : ''); return; }
+      let start = 0; const step = Math.max(1, Math.ceil(target / (1600 / 16)));
+      const timer = setInterval(() => { start += step; if (start >= target) { start = target; clearInterval(timer); } el.textContent = start + (hasPlus && start === target ? '+' : ''); }, 16);
+    }
     const galleryEl = document.getElementById('gallery');
-    if (galleryEl) galleryObs.observe(galleryEl);
-
-    // ── COUNT-UP (suffix from data-count string, e.g. "50+") ──
-    const countObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        const raw = el.dataset.count;
-        const hasPlus = raw.includes('+');
-        const target = parseInt(raw, 10);
-        if (reduceMotion) { el.textContent = target + (hasPlus ? '+' : ''); countObs.unobserve(el); return; }
-        let start = 0;
-        const step = Math.max(1, Math.ceil(target / (1600 / 16)));
-        const timer = setInterval(() => {
-          start += step;
-          if (start >= target) { start = target; clearInterval(timer); }
-          el.textContent = start + (hasPlus && start === target ? '+' : '');
-        }, 16);
-        countObs.unobserve(el);
+    function revealInView() {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+        if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add('visible');
       });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+      if (galleryEl && !galleryEl.classList.contains('visible') && galleryEl.getBoundingClientRect().top < vh * 0.95) galleryEl.classList.add('visible');
+      document.querySelectorAll('[data-count]').forEach(el => { if (el.getBoundingClientRect().top < vh * 0.95) runCount(el); });
+    }
+    window.addEventListener('scroll', revealInView, { passive: true });
+    window.addEventListener('resize', revealInView);
+    window.addEventListener('load', revealInView);
+    document.addEventListener('DOMContentLoaded', revealInView);
+    revealInView();
+    // failsafe: content can never stay hidden, even if something above fails
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      if (galleryEl) galleryEl.classList.add('visible');
+      document.querySelectorAll('[data-count]').forEach(runCount);
+    }, 2200);
 
     // ── FAQ ACCORDION ──
     document.querySelectorAll('.faq-q').forEach(btn => {
