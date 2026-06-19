@@ -426,6 +426,20 @@
     .faq-a p strong { color: #fff; }
     .faq-item.open .faq-a { max-height: 460px; }
 
+    /* ─── SUBMIT PHOTOS ─── */
+    #submit { background: var(--dark); text-align: center; }
+    .submit-inner { max-width: 1000px; margin: 0 auto; }
+    .submit-lead { max-width: 60ch; margin: 0 auto 2.8rem; color: var(--muted); line-height: 1.9; font-size: 0.98rem; }
+    .submit-guide { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-bottom: 2.8rem; text-align: left; }
+    .guide-item { border: 1px solid var(--gold-line); padding: 1.7rem 1.6rem; transition: border-color 0.3s; }
+    .guide-item:hover { border-color: var(--gold-mid); }
+    .g-num { font-family: var(--serif); font-variant-numeric: tabular-nums; color: var(--gold); font-size: 0.85rem; }
+    .guide-item h4 { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin: 0.5rem 0 0.6rem; }
+    .guide-item p { font-size: 0.82rem; line-height: 1.75; color: var(--muted); }
+    .submit-note { font-size: 0.82rem; color: var(--muted); margin-top: 1.3rem; }
+    .submit-note a { color: var(--pink-text); text-decoration: none; }
+    @media (max-width: 700px) { .submit-guide { grid-template-columns: 1fr; } }
+
     /* ─── CONTACT / 08 ─── */
     #contact { background: var(--charcoal); }
     .contact-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: start; }
@@ -1093,6 +1107,41 @@
     </div>
   </section>
 
+  <!-- SUBMIT YOUR PHOTOS -->
+  <section id="submit" class="seam">
+    <div class="submit-inner">
+      <div class="masthead center reveal"><span class="kicker">Apply</span></div>
+      <h2 class="section-title reveal" style="text-align:center;">Submit Your <em>Photos</em></h2>
+      <p class="submit-lead reveal reveal-delay-1">
+        To be considered for the roster, send Lea a few photos — she reviews every submission personally.
+        Recent, natural snapshots are perfect; no professional shoot needed.
+      </p>
+      <div class="submit-guide reveal reveal-delay-1">
+        <div class="guide-item">
+          <span class="g-num">01</span>
+          <h4>Headshot</h4>
+          <p>A clear photo of your face in natural light — hair back, minimal makeup.</p>
+        </div>
+        <div class="guide-item">
+          <span class="g-num">02</span>
+          <h4>Full-Length</h4>
+          <p>Head to toe in fitted clothing so your proportions are visible.</p>
+        </div>
+        <div class="guide-item">
+          <span class="g-num">03</span>
+          <h4>Profile &amp; Walk</h4>
+          <p>A side view — plus a short walking clip if you have one.</p>
+        </div>
+      </div>
+      <a href="https://wa.me/17865689522?text=Hi%20Lea!%20I%27d%20like%20to%20submit%20my%20photos%20for%20World%20Best%20Models%20%F0%9F%8C%9F%20(I%27ll%20attach%20them%20here)"
+         target="_blank" rel="noopener" class="btn-primary reveal reveal-delay-1">Submit Photos via WhatsApp &rarr;</a>
+      <p class="submit-note reveal reveal-delay-1">
+        Tap the button, then attach your photos right in the chat. Prefer Instagram? DM
+        <a href="https://www.instagram.com/wbm.worldbestmodels/" target="_blank" rel="noopener">@wbm.worldbestmodels</a>.
+      </p>
+    </div>
+  </section>
+
   <!-- 08 — APPOINTMENT (CONTACT) -->
   <section id="contact" class="seam">
     <div class="contact-inner">
@@ -1132,6 +1181,10 @@
           </div>
           <div class="fgroup"><label for="ph">Phone / WhatsApp *</label><input id="ph" type="tel" placeholder="(305) 000-0000" required /></div>
           <div class="fgroup"><label for="age">Age</label><input id="age" type="number" placeholder="e.g. 19" min="5" max="70" /></div>
+          <div class="form-row">
+            <div class="fgroup"><label for="ht">Height</label><input id="ht" type="text" placeholder="e.g. 5'9&quot;" /></div>
+            <div class="fgroup"><label for="wt">Weight</label><input id="wt" type="text" placeholder="e.g. 130 lbs" /></div>
+          </div>
           <div class="fgroup">
             <label for="svc">Interested In *</label>
             <select id="svc" required>
@@ -1379,12 +1432,16 @@
       const ln  = document.getElementById('ln').value.trim();
       const ph  = document.getElementById('ph').value.trim();
       const age = document.getElementById('age').value.trim();
+      const ht  = document.getElementById('ht').value.trim();
+      const wt  = document.getElementById('wt').value.trim();
       const svc = document.getElementById('svc').value;
       const msg = document.getElementById('msg').value.trim();
       let text = `Hi Lea! I'm interested in World Best Models 🌟\n\n`;
       text += `*Name:* ${fn} ${ln}\n`;
       text += `*Phone:* ${ph}\n`;
       if (age) text += `*Age:* ${age}\n`;
+      if (ht)  text += `*Height:* ${ht}\n`;
+      if (wt)  text += `*Weight:* ${wt}\n`;
       if (svc) text += `*Interested in:* ${svc}\n`;
       if (msg) text += `\n*About me:* ${msg}`;
       window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
