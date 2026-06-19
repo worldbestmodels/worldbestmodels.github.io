@@ -67,10 +67,10 @@
       --pink-2:      #CC2B5A;
       --pink-light:  #F472A0;
       --pink-text:   #FF6B97;
-      --gold:        #F472A0;
-      --gold-mid:    rgba(255,255,255,0.30);
-      --gold-line:   rgba(255,255,255,0.13);
-      --gold-soft:   rgba(244,114,160,0.10);
+      --gold:        #CC2B5A;
+      --gold-mid:    rgba(204,43,90,0.55);
+      --gold-line:   rgba(204,43,90,0.28);
+      --gold-soft:   rgba(204,43,90,0.10);
       --dark:        #0A0809;
       --charcoal:    #141014;
       --card:        #19141A;
@@ -185,7 +185,7 @@
       font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 1px;
       transition: border-color 0.3s, background 0.3s, transform 0.3s;
     }
-    .btn-wa:hover { border-color: var(--gold); background: rgba(244,114,160,0.06); transform: translateY(-2px); }
+    .btn-wa:hover { border-color: var(--gold); background: rgba(204,43,90,0.06); transform: translateY(-2px); }
 
     a:focus-visible, button:focus-visible {
       outline: 2px solid var(--gold); outline-offset: 3px;
@@ -219,7 +219,7 @@
 
     /* ─── HERO / COVER ─── */
     #hero { min-height: 100svh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-    .hero-canvas { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 60% at 50% -5%, rgba(232,56,109,0.20), transparent 60%), radial-gradient(ellipse 70% 50% at 50% 110%, rgba(244,114,160,0.07), transparent 60%); animation: bgPulse 14s ease-in-out infinite alternate; }
+    .hero-canvas { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 60% at 50% -5%, rgba(232,56,109,0.20), transparent 60%), radial-gradient(ellipse 70% 50% at 50% 110%, rgba(204,43,90,0.07), transparent 60%); animation: bgPulse 14s ease-in-out infinite alternate; }
     @keyframes bgPulse { from { opacity: 0.85; } to { opacity: 1; } }
     .hero-frame-l, .hero-frame-r { position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--gold-mid) 30%, var(--gold-mid) 70%, transparent); }
     .hero-frame-l { left: 5vw; } .hero-frame-r { right: 5vw; }
@@ -238,7 +238,7 @@
     .hero-underrule { width: min(420px, 70%); height: 1px; background: linear-gradient(90deg, transparent, var(--gold-mid), transparent); margin: 0 auto 1.8rem; }
     .hero-sub { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2.4vw, 1.45rem); color: rgba(255,255,255,0.78); max-width: 38ch; margin: 0 auto 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.8rem; }
     .hero-sub::before, .hero-sub::after { content: '✦'; color: var(--gold); font-size: 0.7em; }
-    .hero-support { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,114,160,0.7); margin-bottom: 2.6rem; }
+    .hero-support { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(204,43,90,0.7); margin-bottom: 2.6rem; }
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .hero-scroll { position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
     .hero-scroll .sc-rule { width: 1px; height: 46px; background: linear-gradient(var(--gold-mid), transparent); }
@@ -250,7 +250,7 @@
     .d1 { animation-delay: 0.15s; } .d2 { animation-delay: 0.30s; } .d3 { animation-delay: 0.45s; } .d4 { animation-delay: 0.60s; } .d5 { animation-delay: 0.75s; }
 
     /* ─── MARQUEE ─── */
-    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); padding: 0.85rem 0; background: rgba(244,114,160,0.02); }
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); padding: 0.85rem 0; background: rgba(204,43,90,0.02); }
     .marquee-track { display: inline-flex; white-space: nowrap; animation: marquee 38s linear infinite; }
     .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
     .marquee-wrap.reverse .marquee-track { animation-direction: reverse; }
@@ -263,7 +263,7 @@
     .about-inner { max-width: 1180px; margin: 0 auto; }
     .about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 4.5rem; align-items: start; }
     .about-visual { position: relative; position: sticky; top: 7rem; }
-    .about-frame { width: 100%; aspect-ratio: 3/4; background: linear-gradient(150deg, rgba(232,56,109,0.10), rgba(244,114,160,0.05)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem; position: relative; }
+    .about-frame { width: 100%; aspect-ratio: 3/4; background: linear-gradient(150deg, rgba(232,56,109,0.10), rgba(204,43,90,0.05)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem; position: relative; }
     .about-frame::before, .about-frame::after { content: ''; position: absolute; width: 42px; height: 42px; border: 1px solid var(--gold-mid); }
     .about-frame::before { top: 14px; left: 14px; border-width: 1px 0 0 1px; }
     .about-frame::after { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; }
@@ -375,7 +375,7 @@
     .service-card:hover .service-bar { width: 100%; }
     .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
     .track { padding: 1.7rem 1.9rem; border: 1px solid var(--gold-line); }
-    .track.feature { background: linear-gradient(145deg, rgba(232,56,109,0.10), rgba(244,114,160,0.05)); border-color: var(--gold-mid); }
+    .track.feature { background: linear-gradient(145deg, rgba(232,56,109,0.10), rgba(204,43,90,0.05)); border-color: var(--gold-mid); }
     .track-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .track-name span { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--gold); }
     .track p { font-size: 0.85rem; line-height: 1.7; color: var(--muted); }
@@ -385,7 +385,7 @@
     .ig-inner { max-width: 680px; margin: 0 auto; }
     .ig-inner p { font-size: 0.92rem; line-height: 1.9; color: var(--muted); margin: 1.4rem 0 2.4rem; }
     .ig-btn { display: inline-flex; align-items: center; gap: 1rem; padding: 1.1rem 2.4rem; border: 1px solid var(--gold-line); text-decoration: none; color: #fff; transition: border-color 0.3s, background 0.3s, transform 0.3s; }
-    .ig-btn:hover { border-color: var(--gold); background: rgba(244,114,160,0.05); transform: translateY(-2px); }
+    .ig-btn:hover { border-color: var(--gold); background: rgba(204,43,90,0.05); transform: translateY(-2px); }
     .ig-btn svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; stroke-width: 1.4; }
     .ig-handle-text { display: flex; flex-direction: column; align-items: flex-start; }
     .ig-at { font-size: 1rem; font-weight: 600; font-family: var(--serif); }
@@ -431,10 +431,10 @@
     .fgroup label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
     .fgroup input, .fgroup select, .fgroup textarea { background: rgba(255,255,255,0.03); border: 1px solid var(--gold-line); padding: 0.9rem 1rem; color: #fff; font-family: var(--sans); font-size: 0.9rem; outline: none; width: 100%; transition: border-color 0.25s, background 0.25s; }
     .fgroup input::placeholder, .fgroup textarea::placeholder { color: rgba(255,255,255,0.25); }
-    .fgroup input:focus, .fgroup select:focus, .fgroup textarea:focus { border-color: var(--gold); background: rgba(244,114,160,0.04); }
+    .fgroup input:focus, .fgroup select:focus, .fgroup textarea:focus { border-color: var(--gold); background: rgba(204,43,90,0.04); }
     .fgroup select option { background: var(--charcoal); }
     .fgroup textarea { resize: vertical; min-height: 110px; }
-    .next-steps { background: rgba(244,114,160,0.04); border: 1px solid var(--gold-line); padding: 1.3rem 1.5rem; }
+    .next-steps { background: rgba(204,43,90,0.04); border: 1px solid var(--gold-line); padding: 1.3rem 1.5rem; }
     .next-steps strong { color: var(--gold); font-size: 0.62rem; letter-spacing: 0.16em; }
     .next-steps ol { margin: 0.7rem 0 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
     .next-steps li { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
@@ -457,7 +457,7 @@
     .footer-social { display: flex; gap: 0.7rem; }
     .footer-social a { width: 42px; height: 42px; border: 1px solid var(--gold-line); display: flex; align-items: center; justify-content: center; color: var(--gold); text-decoration: none; transition: all 0.25s; }
     .footer-social a svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    .footer-social a:hover { border-color: var(--gold); background: rgba(244,114,160,0.06); transform: translateY(-2px); }
+    .footer-social a:hover { border-color: var(--gold); background: rgba(204,43,90,0.06); transform: translateY(-2px); }
     .footer-links { display: flex; gap: 1.8rem; justify-content: center; list-style: none; flex-wrap: wrap; margin-bottom: 2rem; }
     .footer-links a { font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.25s; }
     .footer-links a:hover { color: var(--gold); }
@@ -474,7 +474,7 @@
     .lightbox img { max-width: 90vw; max-height: 82vh; border: 1px solid var(--gold-mid); box-shadow: 0 24px 90px rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.3s ease; }
     .lb-folio { font-family: var(--serif); font-variant-numeric: tabular-nums; font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
     .lb-btn { position: absolute; background: rgba(255,255,255,0.04); border: 1px solid var(--gold-mid); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s; }
-    .lb-btn:hover { background: rgba(244,114,160,0.15); border-color: var(--gold); }
+    .lb-btn:hover { background: rgba(204,43,90,0.15); border-color: var(--gold); }
     .lb-close { top: 1.3rem; right: 1.3rem; width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; }
     .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; }
     .lb-prev { left: 1.3rem; } .lb-next { right: 1.3rem; }
@@ -875,7 +875,7 @@
       <div class="why-grid">
         <div class="why-card reveal reveal-delay-1">
           <span class="why-entry-num">i</span>
-          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="#F472A0" stroke="none"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="#CC2B5A" stroke="none"/></svg></span>
           <h3>Personal Attention</h3>
           <p>Lea personally trains every model. You're not a number here — you're coached one-on-one by someone who truly cares about your growth and success.</p>
         </div>
@@ -1007,7 +1007,7 @@
         straight from Miami.
       </p>
       <a href="https://www.instagram.com/wbm.worldbestmodels/" target="_blank" rel="noopener" class="ig-btn reveal reveal-delay-1">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="#F472A0" stroke="none"/></svg>
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="#CC2B5A" stroke="none"/></svg>
         <div class="ig-handle-text">
           <span class="ig-at">@wbm.worldbestmodels</span>
           <span class="ig-sub">Follow on Instagram</span>
@@ -1207,7 +1207,7 @@
 
     // ── SPARKLE CURSOR (foil flecks; desktop + reduced-motion safe) ──
     if (!reduceMotion && canHover) {
-      const colors = ['#F472A0','#E8386D','#FFB6C1','#ffffff'];
+      const colors = ['#CC2B5A','#E8386D','#F472A0','#ffffff'];
       let lastSparkle = 0;
       document.addEventListener('mousemove', (e) => {
         const now = Date.now();
