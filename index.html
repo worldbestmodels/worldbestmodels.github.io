@@ -306,24 +306,29 @@
     .gallery-frame::before, .gallery-frame::after { content: ''; position: absolute; width: 16px; height: 16px; border: 1px solid var(--gold); }
     .gallery-frame::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
     .gallery-frame::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
-    .gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
-    .gallery-item {
-      display: block; width: 100%; aspect-ratio: 3/4; padding: 0; border: none; background: var(--card);
-      cursor: pointer; position: relative; overflow: hidden;
-      opacity: 0; clip-path: inset(0 0 100% 0);
-      transition: opacity 0.7s cubic-bezier(.16,1,.3,1), clip-path 0.7s cubic-bezier(.16,1,.3,1);
-      transition-delay: calc(var(--i, 0) * 45ms);
+    /* ─ MOVING LOOKBOOK REEL ─ */
+    .reel {
+      display: flex; flex-direction: column; gap: 12px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     }
-    .gallery.visible .gallery-item { opacity: 1; clip-path: inset(0 0 0 0); }
-    .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; filter: saturate(0.9) brightness(0.92); transition: transform 0.6s ease, filter 0.5s ease; }
-    .gallery-item::after { content: ''; position: absolute; inset: 0; border: 0 solid var(--gold); opacity: 0; transition: opacity 0.35s; pointer-events: none; }
-    .gallery-item::before { content: attr(data-idx); position: absolute; left: 0.6rem; bottom: 0.5rem; z-index: 2; font-family: var(--serif); font-variant-numeric: tabular-nums; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold); opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
-    .gallery-item:first-child > .pin { position: absolute; top: 0.7rem; left: 0.7rem; width: 22px; height: 1px; background: var(--gold); z-index: 2; }
+    .reel-row { display: flex; overflow: hidden; }
+    .reel-track { display: flex; gap: 12px; width: max-content; animation: reelScroll 80s linear infinite; will-change: transform; }
+    .reel-row.rev .reel-track { animation-direction: reverse; animation-duration: 70s; }
+    .reel-row:hover .reel-track { animation-play-state: paused; }
+    @keyframes reelScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .reel-item {
+      flex: 0 0 auto; height: clamp(220px, 31vw, 340px); aspect-ratio: 3/4;
+      padding: 0; border: none; background: var(--card); cursor: pointer; position: relative; overflow: hidden;
+    }
+    .reel-item img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
+      filter: grayscale(0.55) brightness(0.82); transition: transform 0.6s ease, filter 0.5s ease;
+    }
+    .reel-item::after { content: ''; position: absolute; inset: 0; border: 0 solid var(--pink); opacity: 0; transition: opacity 0.35s, border-width 0.35s; pointer-events: none; }
     @media (hover: hover) {
-      .gallery-item:hover img { transform: scale(1.04); filter: saturate(1.05) brightness(1); }
-      .gallery-item:hover::after { opacity: 1; border-width: 1px; }
-      .gallery-item:hover::before { opacity: 1; transform: translateY(0); }
+      .reel-item:hover img { transform: scale(1.07); filter: none; }
+      .reel-item:hover::after { opacity: 1; border-width: 2px; }
     }
     .models-note { margin-top: 1.8rem; text-align: center; font-size: 0.8rem; color: var(--muted); }
     .models-note a { color: var(--pink-text); text-decoration: none; }
@@ -568,6 +573,8 @@
       *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
       .reveal, .gallery-item, .hero-line-anim { opacity: 1 !important; clip-path: none !important; transform: none !important; }
       .gallery.visible .gallery-item { opacity: 1 !important; clip-path: none !important; }
+      .reel-track { animation: none !important; }
+      .reel-row { overflow-x: auto; }
       .rule.reveal { transform: scaleX(1) !important; }
       .lightbox img { opacity: 1 !important; }
       #loader { display: none !important; }
@@ -788,22 +795,47 @@
       </div>
 
       <div class="gallery-frame reveal">
-        <div class="gallery" id="gallery">
-          <button class="gallery-item" style="--i:0"  data-idx="01" onclick="openLightbox(0)"  aria-label="View model photo 1"><span class="pin" aria-hidden="true"></span><img src="models/model-01.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
-          <button class="gallery-item" style="--i:1"  data-idx="02" onclick="openLightbox(1)"  aria-label="View model photo 2"><img src="models/model-02.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
-          <button class="gallery-item" style="--i:2"  data-idx="03" onclick="openLightbox(2)"  aria-label="View model photo 3"><img src="models/model-03.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
-          <button class="gallery-item" style="--i:3"  data-idx="04" onclick="openLightbox(3)"  aria-label="View model photo 4"><img src="models/model-04.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
-          <button class="gallery-item" style="--i:4"  data-idx="05" onclick="openLightbox(4)"  aria-label="View model photo 5"><img src="models/model-05.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:5"  data-idx="06" onclick="openLightbox(5)"  aria-label="View model photo 6"><img src="models/model-06.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:6"  data-idx="07" onclick="openLightbox(6)"  aria-label="View model photo 7"><img src="models/model-07.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:7"  data-idx="08" onclick="openLightbox(7)"  aria-label="View model photo 8"><img src="models/model-08.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:8"  data-idx="09" onclick="openLightbox(8)"  aria-label="View model photo 9"><img src="models/model-09.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:9"  data-idx="10" onclick="openLightbox(9)"  aria-label="View model photo 10"><img src="models/model-10.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:10" data-idx="11" onclick="openLightbox(10)" aria-label="View model photo 11"><img src="models/model-11.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:11" data-idx="12" onclick="openLightbox(11)" aria-label="View model photo 12"><img src="models/model-12.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:12" data-idx="13" onclick="openLightbox(12)" aria-label="View model photo 13"><img src="models/model-13.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:13" data-idx="14" onclick="openLightbox(13)" aria-label="View model photo 14"><img src="models/model-14.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
-          <button class="gallery-item" style="--i:14" data-idx="15" onclick="openLightbox(14)" aria-label="View model photo 15"><img src="models/model-15.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+        <div class="reel" id="gallery">
+          <div class="reel-row">
+            <div class="reel-track">
+              <button class="reel-item" onclick="openLightbox(0)" aria-label="View model photo 1"><img src="models/model-01.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
+              <button class="reel-item" onclick="openLightbox(1)" aria-label="View model photo 2"><img src="models/model-02.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
+              <button class="reel-item" onclick="openLightbox(2)" aria-label="View model photo 3"><img src="models/model-03.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
+              <button class="reel-item" onclick="openLightbox(3)" aria-label="View model photo 4"><img src="models/model-04.jpg" alt="World Best Models — model portfolio" fetchpriority="high" /></button>
+              <button class="reel-item" onclick="openLightbox(4)" aria-label="View model photo 5"><img src="models/model-05.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(5)" aria-label="View model photo 6"><img src="models/model-06.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(6)" aria-label="View model photo 7"><img src="models/model-07.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(7)" aria-label="View model photo 8"><img src="models/model-08.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <!-- duplicate set for seamless loop -->
+              <button class="reel-item" onclick="openLightbox(0)" tabindex="-1" aria-hidden="true"><img src="models/model-01.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(1)" tabindex="-1" aria-hidden="true"><img src="models/model-02.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(2)" tabindex="-1" aria-hidden="true"><img src="models/model-03.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(3)" tabindex="-1" aria-hidden="true"><img src="models/model-04.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(4)" tabindex="-1" aria-hidden="true"><img src="models/model-05.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(5)" tabindex="-1" aria-hidden="true"><img src="models/model-06.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(6)" tabindex="-1" aria-hidden="true"><img src="models/model-07.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(7)" tabindex="-1" aria-hidden="true"><img src="models/model-08.jpg" alt="" loading="lazy" /></button>
+            </div>
+          </div>
+          <div class="reel-row rev">
+            <div class="reel-track">
+              <button class="reel-item" onclick="openLightbox(8)"  aria-label="View model photo 9"><img src="models/model-09.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(9)"  aria-label="View model photo 10"><img src="models/model-10.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(10)" aria-label="View model photo 11"><img src="models/model-11.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(11)" aria-label="View model photo 12"><img src="models/model-12.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(12)" aria-label="View model photo 13"><img src="models/model-13.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(13)" aria-label="View model photo 14"><img src="models/model-14.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(14)" aria-label="View model photo 15"><img src="models/model-15.jpg" alt="World Best Models — model portfolio" loading="lazy" /></button>
+              <!-- duplicate set for seamless loop -->
+              <button class="reel-item" onclick="openLightbox(8)"  tabindex="-1" aria-hidden="true"><img src="models/model-09.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(9)"  tabindex="-1" aria-hidden="true"><img src="models/model-10.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(10)" tabindex="-1" aria-hidden="true"><img src="models/model-11.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(11)" tabindex="-1" aria-hidden="true"><img src="models/model-12.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(12)" tabindex="-1" aria-hidden="true"><img src="models/model-13.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(13)" tabindex="-1" aria-hidden="true"><img src="models/model-14.jpg" alt="" loading="lazy" /></button>
+              <button class="reel-item" onclick="openLightbox(14)" tabindex="-1" aria-hidden="true"><img src="models/model-15.jpg" alt="" loading="lazy" /></button>
+            </div>
+          </div>
         </div>
       </div>
 
